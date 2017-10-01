@@ -10,6 +10,8 @@ export default class Masonry {
      * @param res {object} - screen resolution setup
      */
     constructor(grid, cols, res) {
+        // console.log(1);
+        // debugger;
         this.grid = document.querySelector(grid);
         this.gridItems = Array.prototype.slice.call(this.grid.children);
         this.cols = cols;
@@ -133,16 +135,17 @@ function _getLeft(w, c) {
  * @private
  */
 function _getTop(i, c) {
-    let top = 0,
-        iPrev = i;
+    let elTop = 0,
+        iPrev = i,
+        col = c;
 
-    while(c > 1) {
+    while(col > 1) {
         iPrev -= this.colSet;
-        top += this.gridItems[iPrev].offsetHeight;
-        c--;
+        elTop += this.gridItems[iPrev].offsetHeight;
+        col--;
     }
 
-    this._colsHeight.push(top + this.gridItems[i].offsetHeight);
+    this._colsHeight.push(elTop + this.gridItems[i].offsetHeight);
 
-    return top;
+    return elTop;
 }
